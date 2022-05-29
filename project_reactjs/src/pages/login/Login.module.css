@@ -1,0 +1,11 @@
+.imgLeft{
+   height: 100vh;
+   object-fit: cover;
+}
+.Login{
+    height: 100vh;
+}
+.icon{
+    width: 35px;
+    height: 35px;
+}

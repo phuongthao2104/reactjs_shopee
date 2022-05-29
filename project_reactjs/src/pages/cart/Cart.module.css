@@ -1,0 +1,29 @@
+.bg {
+  background-color: #f2f3f4;
+}
+
+.iconShop {
+  width: 48px;
+  height: 24px;
+}
+.iconSP {
+  height: 80px;
+  width: 80px;
+  box-sizing: border-box;
+}
+.iconHeart {
+  width: 30px;
+  height: 30px;
+}
+.delete {
+  display: none;
+}
+.count {
+  width: 40px;
+  height: 30px;
+}
+@media only screen and (max-width: 739px) {
+  .delete {
+    display: block;
+  }
+}

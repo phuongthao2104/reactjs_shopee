@@ -1,0 +1,90 @@
+.szImg {
+  width: 130px;
+  height: 88px;
+}
+.fz {
+  font-size: 12px;
+  font-weight: 700;
+}
+.description {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6f787e;
+  line-height: 1.6rem;
+  cursor: pointer;
+}
+.szBox {
+  height: 170px;
+  cursor: pointer;
+}
+.widthDescription {
+}
+.bgFooter {
+  background-color: #f2f3f4;
+}
+.szStore {
+  height: 40px;
+  cursor: pointer;
+}
+.widthRegistration {
+height: auto;
+}
+.widthCompany {
+  width: 545px;
+height: auto;
+}
+.super {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
+  width:100%;
+
+}
+@media only screen and (max-width: 739px) {
+  .szBox,
+  .widthRegistration {
+    width: auto;
+  }
+  .widthCompany {
+    width: auto;
+    height: auto;
+  }
+  .widthRegistration {
+    width: auto;
+    height: auto;
+  }
+  .super {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
+  }
+  .email {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-end;
+  }
+  .store {
+    display: flex;
+    flex-direction: column;
+  }
+  .szStore {
+    margin-top: 12px;
+  }
+  .szAbout {
+    width: 115px;
+  }
+}
+@media only screen and (min-width: 740px) and (max-width: 1024px) {
+  .super {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+  .szBox {
+    width: auto;
+  }
+  .szAbout {
+    width: auto;
+  }
+}
