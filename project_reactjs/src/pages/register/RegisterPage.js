@@ -130,7 +130,7 @@ const Registration = () => {
         <Col lg="8">
           <div className="d-none d-lg-block">
             <img
-              src="../bg-01.jpg"
+              src="https://wiki.tino.org/wp-content/uploads/2021/09/word-image-52.jpeg"
               alt=""
               className={`${styles.imgLeft} w-100`}
             />

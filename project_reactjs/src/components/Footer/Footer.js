@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../Footer/Footer.module.css";
 const Footer = () => {
-  const [tutorial, setTutorial] = useState([   
-  ]);
+  const [tutorial, setTutorial] = useState([]);
 
   console.log(tutorial);
   return (
     <div>
-      
-
       <Container fluid className={` ${styles.bgFooter} pt-3`}>
         <Container>
           <Row>
@@ -22,30 +19,18 @@ const Footer = () => {
                   <li className={`${styles.description} mt-1`}>
                     Trung tâm trợ giúp
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Shopee Blog
-                  </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Shopee mall
-                  </li>
+                  <li className={`${styles.description} mt-1`}>Shopee Blog</li>
+                  <li className={`${styles.description} mt-1`}>Shopee mall</li>
                   <li className={`${styles.description} mt-1`}>
                     Hướng dẫn mua hàng
                   </li>
                   <li className={`${styles.description} mt-1`}>
                     Hướng dẫn Bán hàng
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Thanh toán
-                  </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Shopee Xu
-                  </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Shopee mall
-                  </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Vận chuyển
-                  </li>
+                  <li className={`${styles.description} mt-1`}>Thanh toán</li>
+                  <li className={`${styles.description} mt-1`}>Shopee Xu</li>
+                  <li className={`${styles.description} mt-1`}>Shopee mall</li>
+                  <li className={`${styles.description} mt-1`}>Vận chuyển</li>
                   <li className={`${styles.description} mt-1`}>
                     Trả hàng & Hoàn tiền
                   </li>
@@ -64,24 +49,18 @@ const Footer = () => {
                   <li className={`${styles.description} mt-1`}>
                     Giới thiệu về Shopee Việt Nam
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Tuyển dụng
-                  </li>
+                  <li className={`${styles.description} mt-1`}>Tuyển dụng</li>
                   <li className={`${styles.description} mt-1`}>
                     Điều khoản Shopee
                   </li>
                   <li className={`${styles.description} mt-1`}>
                     Chính sách bảo mật
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Chính hãng
-                  </li>
+                  <li className={`${styles.description} mt-1`}>Chính hãng</li>
                   <li className={`${styles.description} mt-1`}>
                     Kênh người bán
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Flash Sales
-                  </li>
+                  <li className={`${styles.description} mt-1`}>Flash Sales</li>
                   <li className={`${styles.description} mt-1`}>
                     Chương trình tiếp thị liên kết Shopee
                   </li>
@@ -94,20 +73,14 @@ const Footer = () => {
                   <li className={`${styles.fz} text-uppercase mt-1`}>
                     Thanh toán
                   </li>
-
-
                 </ul>
 
                 <ul className={`${styles.szAbout} list-unstyled`}>
                   <li className={`${styles.fz} text-uppercase mt-1`}>
                     THEO DÕI CHÚNG TÔI TRÊN
                   </li>
-                  <li className={`${styles.description} mt-1`}>
-                    facebook
-                  </li>
-                  <li className={`${styles.description} mt-1`}>
-                    Instagram
-                  </li>
+                  <li className={`${styles.description} mt-1`}>facebook</li>
+                  <li className={`${styles.description} mt-1`}>Instagram</li>
                 </ul>
                 <ul className={`${styles.szAbout} list-unstyled`}>
                   <li className={`${styles.fz} text-uppercase mt-1`}>
@@ -117,7 +90,7 @@ const Footer = () => {
               </div>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col xs={6} md={4}>
             © 2022 Shopee. Tất cả các quyền được bảo lưu.
             </Col>
@@ -136,12 +109,11 @@ const Footer = () => {
                 </ul>
             </Col>
 
-          </Row>
-
+          </Row> */}
         </Container>
       </Container>
 
-      <Container fluid className="bg-white text-black">
+      {/* <Container fluid className="bg-white text-black">
         <Container fluid>
           <Row>
             <Col >
@@ -178,7 +150,7 @@ const Footer = () => {
             </Col>
           </Row>
         </Container>
-      </Container>
+      </Container> */}
     </div>
   );
 };

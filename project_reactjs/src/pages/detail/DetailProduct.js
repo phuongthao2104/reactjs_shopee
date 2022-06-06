@@ -16,6 +16,7 @@ const DetailProduct = () => {
   const [count, setCount] = useState(1);
   const [product, setProduct] = useState([]);
   const { addItem } = useCart();
+  const [quantity, SetQuantity] = useState(1);
 
   useEffect(() => {
     axios
@@ -33,15 +34,18 @@ const DetailProduct = () => {
   }, [id]);
 
   const addItemToCart = () => {
-    const data = {
-      id: product.product_id,
+    // const data = {
+    //   id: product.product_id,
+    const data ={
+      id: product.id,
       name: product.name,
       price: product.price,
       avatar: product.avatar,
       detail: product.detail,
       cate_id: product.cate_id,
+      product_id:product.id
     };
-    addItem(data, parseInt(1));
+    addItem(data,parseInt(quantity));
 
     toast("Sản phẩm đã vào giỏ hàng!");
   };
@@ -174,29 +178,14 @@ const DetailProduct = () => {
                   <span>Chọn số lượng</span>
                 </div>
                 <div>
-                  <button
-                    className="border-0 ms-3 px-3 py-1"
-                    onClick={() => {
-                      if (count > 0) {
-                        setCount(count - 1);
-                      }
-                    }}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="numeric"
-                    value={count}
-                    className={`${styles.count} ms-3 text-center`}
+                  
+                <input
+                    type="number"
+                    defaultValue={quantity}
+                    className="form-control ms-5"
+                    style={{ width: "150px" }}
+                    onChange={(e) => SetQuantity(e.target.value)}
                   />
-                  <button
-                    className="border-0 light ms-3 px-3 py-1"
-                    onClick={() => {
-                      setCount(count + 1);
-                    }}
-                  >
-                    +
-                  </button>
                 </div>
               </div>
             </div>

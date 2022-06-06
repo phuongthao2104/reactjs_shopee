@@ -47,7 +47,11 @@ const Login = () => {
       <Row className={styles.height}>
         <Col lg="8">
           <div className="d-none d-lg-block">
-            <img src="https://wiki.tino.org/wp-content/uploads/2021/09/word-image-52.jpeg" alt="" className={`${styles.imgLeft} w-90`} />
+            <img
+              src="https://wiki.tino.org/wp-content/uploads/2021/09/word-image-52.jpeg"
+              alt=""
+              className={`${styles.imgLeft} w-100 `}
+            />
           </div>
         </Col>
         <Col lg="4">
@@ -114,7 +118,7 @@ const Login = () => {
                     </div>
                     <div>
                       <button className="bg-body border-0">
-                       Quên mật khẩu
+                        Quên mật khẩu
                       </button>
                     </div>
                   </div>
@@ -125,14 +129,14 @@ const Login = () => {
                     </button>
                     <ToastContainer />;
                     <Link
-                      to="/Registration"
+                      to="/register"
                       className="text-white text-decoration-none "
                     >
                       <button type="submit" className="btn btn-danger  ">
                         Đăng Ký
                       </button>
                     </Link>
-                  </div>                
+                  </div>
                 </form>
               </div>
             )}
