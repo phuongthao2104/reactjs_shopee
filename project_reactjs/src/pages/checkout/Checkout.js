@@ -40,7 +40,7 @@ const Checkout = () => {
     // setLoading(true);
     const orderProduct = {
       user_id: nameInfor.id,
-      full_Name: data.fullName,
+      full_name: data.fullName,
       phone: data.phone,
       address: data.address,
       item: items,

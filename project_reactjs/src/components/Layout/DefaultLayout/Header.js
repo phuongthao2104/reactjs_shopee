@@ -51,7 +51,7 @@ const Header = () => {
   // }};
   const hanGioHang = () => {
     if (nameInfor) {
-      console.log("ok");
+      // console.log("ok");
       navigate("/my-profile");
     } else {
       navigate("/Login");
@@ -146,10 +146,11 @@ const Header = () => {
                         ></button>
                       </div>
                       <div className="modal-body d-flex flex-column align-items-start ">
-                        <button className="bg-body border-0">
+                        <button className="bg-body border-0" >
                           Tài Khoản của tôi
                         </button>
-                        <button className="bg-body border-0">Đơn Mua</button>
+                        <button className="bg-body border-0"onClick={hanGioHang}>
+                          Đơn Mua</button>
                       </div>
                       <div className="modal-footer d-flex justify-content-between">
                         <button
