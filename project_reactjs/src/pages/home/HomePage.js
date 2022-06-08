@@ -7,7 +7,7 @@ import { BsArrowUpSquare } from "react-icons/bs";
 
 import "../../App.css";
 import Footer from "../../components/Footer/Footer";
-import serviceCallApi from "../../services/ServiceApi";
+import serviceCallApi from "../../services/serviceApi";
 const axios = require("axios").default;
 
 const pages = [1, 2, 3];

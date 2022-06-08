@@ -1,7 +1,6 @@
-import React from "react";
+import React ,{ useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "../DefaultLayout/Header.module.css";
-import { BsGrid, BsSearch } from "react-icons/bs";
 import { useNavigate, Link } from "react-router-dom";
 import {
   BsPersonCircle,
@@ -12,45 +11,56 @@ import {
   BsFillBellFill,
   BsGlobe,
   BsQuestionCircle,
+  BsGrid, 
+  BsSearch
 } from "react-icons/bs";
 import { useCart } from "react-use-cart";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logout,
+  checkAuth,
+  selectSignin,
+} from "./../../../features/login/loginSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const infor = localStorage.getItem("infor");
-  const nameInfor = JSON.parse(infor);
+  const userLocal = localStorage.getItem("userData");
+  const infoUser = JSON.parse(userLocal);
   const { totalItems } = useCart();
-
+  const { loggedIn } = useSelector(selectSignin);
   // const { totalItems } = useCart();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-  const handLogOut = () => {
-    localStorage.removeItem("infor");
-    navigate("/");
-    window.location.reload();
-    console.log("click");
+  const handLogOut = async () => {
+    try {
+      await dispatch(logout());
+      alert("Logout Ok");
+    } catch (error) {
+      console.log(error);
+    }
   };
+ 
+  // const handLogOut = () => {
+  //   localStorage.removeItem("infor");
+
+  //   navigate("/");
+  //   window.location.reload();
+  //   console.log("click");
+  // };
   const hanDangNhap = () => {
-    if (nameInfor) {
+    if (loggedIn) {
       // navigate("/");
 
-      console.log(nameInfor);
+      console.log(loggedIn);
     } else {
       window.location.reload(navigate("/login"));
     }
   };
-  //   if (nameInfor) {
-  //     // navigate("/");
-
-  //     console.log("log");
-  //   if (nameInfor != null) {
-  //     window.location.reload(navigate("/login"));
-  //   } else {
-  //     window.location.reload(navigate("/login"));
-  //   }
-  //   // navigate("/InforUser");
-  // }};
   const hanGioHang = () => {
-    if (nameInfor) {
+    if (loggedIn) {
       // console.log("ok");
       navigate("/my-profile");
     } else {
@@ -97,13 +107,14 @@ const Header = () => {
                         Tiếng việt
                       </li>
                       <li className="pe-2 border-end text-nowrap">
+                        
                         <button
                           className={`${styles.bgHelp} border-0 text-light`}
                           onClick={() => {
                             navigate("/register");
                           }}
                         >
-                          {nameInfor ? "" : "Đăng ký"}
+                          {loggedIn ? "" : "Đăng ký"}
                         </button>
                       </li>
                       <li className="ps-2 text-nowrap">
@@ -113,12 +124,12 @@ const Header = () => {
                           className={`${styles.bgHelp} border-0 text-light `}
                           onClick={hanDangNhap}
                         >
-                          {nameInfor ? (
+                          {loggedIn ? (
                             <BsPersonCircle className="text-light me-1 fs-5" />
                           ) : (
                             ""
                           )}
-                          {nameInfor ? nameInfor.name : "Đăng Nhập"}
+                          {loggedIn ? infoUser.name : "Đăng Nhập"}
                         </button>
                       </li>
                     </ul>
@@ -171,99 +182,7 @@ const Header = () => {
                   </div>
                 </div>
 
-                {/* <div className="d-flex justify-content-around ">
-                  <div className="d-flex justify-content-around mt-2 ">
-                    <div className=" ">
-                      <div className="d-none d-md-block ms-5  ">
-                        {nameInfor ? (
-                          <div>
-                            <h6>{nameInfor.name}</h6>
-                          </div>
-                        ) : (
-                          <button
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            className="border-0 bg-body  py-1 px-2 text-nowrap mt-2"
-                            onClick={hanDangNhap}
-                          >
-                            Đăng nhập
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                    <div className=" d-flex">
-                      <div className="d-none d-md-block ">
-                        {nameInfor && (
-                          <div>
-                            <button
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                              className="border-0 bg-body  py-1 px-2 text-nowrap mt-2 ms-5"
-                              onClick={handLogOut}
-                            >
-                              Đăng xuất
-                            </button>
-                            <button
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                              className="border-0 bg-body  py-1 px-2 text-nowrap mt-2 ms-5"
-                              onClick={hanGioHang}
-                            >
-                              Quản lý đơn hàng
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className={`${styles.modall} modal`}
-                    id="exampleModal"
-                    tabIndex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 className="modal-title" id="exampleModalLabel">
-                            Modal title
-                          </h5>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body text-black">
-                          <div>
-                            <button
-                              className={`bg-body border-0 ${styles.hoverButton} mb-2`}
-                            >
-                              Tài khoản của tôi
-                            </button>
-                          </div>
-                          <div>
-                            <button className={`bg-body border-0  mb-2`}>
-                              Đơn mua hàng
-                            </button>
-                          </div>
-                        </div>
-                        <div className={`modal-footer ${styles.logOut}`}>
-                          <button
-                            className="border-0 bg-body rounded-3 py-1 px-2 text-nowrap ms-2"
-                            onClick={handLogOut}
-                          >
-                            <BsBoxArrowRight className="fs-5 fw-bold me-2" />{" "}
-                            Đăng Xuất
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+               
               </div>
             </Col>
             {/* <Col>

@@ -1,17 +1,43 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { login, checkAuth, logout, selectSignin } from "./loginSlice";
+import ReactLoading from "react-loading";
+import { Link, useNavigate } from "react-router-dom";
 
-const FromLogin = (props) => {
+const FromLogin = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const { loading, loggedIn, error } = useSelector(selectSignin);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    const formData = {
+      email: data.email,
+      password: data.password,
+      rememberMe: true,
+    };
+
+    try {
+      await dispatch(login(formData));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
-      <form
-        onSubmit={handleSubmit(props.onSubmit)}
+      {loading ? (
+        <div className='text-center d-flex justify-content-center'>
+          <ReactLoading type='spin' color='blue' height={"20%"} width={"20%"} />
+        </div>
+      ) : (
+        <form
+        onSubmit={handleSubmit(onSubmit)}
         className="needs-validation"
       >
         <div className="mb-3">
@@ -51,6 +77,8 @@ const FromLogin = (props) => {
           </button>
         </div>
       </form>
+      )}
+      
     </div>
   );
 };

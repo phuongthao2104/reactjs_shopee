@@ -4,7 +4,7 @@ import Header from "../../components/Layout/DefaultLayout/Header";
 import { useForm } from "react-hook-form";
 import { useCart } from "react-use-cart";
 import ReactLoading from "react-loading";
-import serviceCallApi from "../../services/ServiceApi";
+import serviceCallApi from "../../services/serviceApi";
 import { Link, useNavigate } from "react-router-dom";
 import { nameInfor } from "./../../untils";
 import axios from "axios";
