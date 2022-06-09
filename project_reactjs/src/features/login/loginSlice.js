@@ -51,6 +51,9 @@ export const loginSlice = createSlice({
         loading: false,
         loggedIn: true,
         loggedInUser: user,
+        token,loading: false,
+        loggedIn: true,
+        loggedInUser: user,
         token,
       });
     },
