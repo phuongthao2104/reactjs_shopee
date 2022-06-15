@@ -5,7 +5,10 @@ export const getListProduct = createAsyncThunk(
   "product/getAll",
   products.productListService
 );
-
+export const getDetailProduct = createAsyncThunk(
+  "product/getDetail",
+  products.productDetailService
+);
 
 const initialState = {
   loading: false,
@@ -26,8 +29,21 @@ export const productSlice = createSlice({
       });
     },
     [getListProduct.rejected]: receiveError,
+
+    [getDetailProduct.pending]: startLoading,
+    [getDetailProduct.fulfilled]: (state, { payload }) => {
+      const { data } = payload;
+      Object.assign(state, {
+        loading: false,
+        data: data.data,
+      });
+    },
+    [getDetailProduct.rejected]: receiveError,
+
+  
   },
 });
+
 function startLoading(state) {
   Object.assign(state, {
     loading: true,
@@ -45,3 +61,4 @@ function receiveError(state, action) {
 export const selectProduct = (state) => state.products;
 
 export const productReducer = productSlice.reducer;
+

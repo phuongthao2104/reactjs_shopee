@@ -19,7 +19,7 @@ function Routing() {
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/thank' element={<ThankPage />} />
           <Route path='/my-profile' element={<UserPage />} />
-          <Route path='/:product_id/:slug' element={<DetailProduct />} />
+          <Route path='/product/:product_id/:slug' element={<DetailProduct />} />
         </Routes>
       </>
   );

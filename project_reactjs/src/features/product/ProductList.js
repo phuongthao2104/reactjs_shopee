@@ -12,85 +12,92 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const ProductList = () => {
-    const dispatch = useDispatch();
-    const { loading, data } = useSelector(selectProduct);
-  
-    useEffect(() => {
-      const handleScrol = (e) => {
-        const onTop = document.getElementById("onTheTop");
-        if (window.scrollY > 100) {
-          onTop.classList.remove("d-none");
-        } else {
-          onTop.classList.add("d-none");
-        }
-      };
-      window.addEventListener("scroll", handleScrol);
-    }, []);
-  
-  
-    const onTop = (e) => {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
-    };
-  
-    const getProductAll = useCallback(async () => {
-      // console.log("ok");
-      try {
-        await dispatch(getListProduct());
-      } catch (error) {
-        console.log(error);
+  const pages = [1, 2, 3];
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const { loading, data } = useSelector(selectProduct);
+
+  useEffect(() => {
+    const handleScrol = (e) => {
+      const onTop = document.getElementById("onTheTop");
+      if (window.scrollY > 100) {
+        onTop.classList.remove("d-none");
+      } else {
+        onTop.classList.add("d-none");
       }
-    }, [dispatch]);
-  
-    useEffect(() => {
-      getProductAll();
-    }, [dispatch, getProductAll]);
-    const renderProduct = () => {
-      if (data.length) {
-        return data.map((product, index) => {
-          
-          return (         
-            <Link to={`product/${product.id}/${product.slug}`}
-             className={`card ${styles.cardSize} shadow text-decoration-none text-black mt-4 rounded  mx-2`}
-                        key={index}
-                      >
+    };
+    window.addEventListener("scroll", handleScrol);
+  }, []);
+
+  const handleNextPage = (i) => {
+
+    const animation = setInterval(() => {
+      document.body.scrollTop = 100;
+      document.documentElement.scrollTop = 100;
+      console.log("log");
+      clearInterval(animation, 200);
+    }, 200);
+    setPage(i + 1);
+
+  };
+
+  const onTop = (e) => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
+
+  const getProductAll = useCallback(async () => {
+    // console.log("ok");
+    try {
+      await dispatch(getListProduct());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    getProductAll();
+  }, [dispatch, getProductAll]);
+  const renderProduct = () => {
+    if (data.length) {
+      return data.map((product, index) => {
+
+        return (
+          <Link to={`product/${product.id}/${product.slug}`}
+            className={`card ${styles.cardSize} shadow text-decoration-none text-black mt-4 rounded  mx-2`}
+            key={index}
+          >
             <img
-               src={product.avatar}
-                className={`${styles.cardImg}`}
-                          alt="..."
-                        />
-                        <div className={`card-body p-2`}>
-                          <p
-                            className={`card-text ${styles.fzCardText} mt-1 mb-2`}
-                          >
-                            {product.name}
-                          </p>
-                        </div>
-                        <div className="d-flex justify-content-between p-1">
-                          <div className="d-flex">
-                            <h5 className="card-title text-danger">
-                              {product.price.toLocaleString()}
-                            </h5>
-                          </div>
-                          <span>Đã bán 100</span>
-                        </div>
-                      </Link>
-          );
-        });
-      }};
-    return (
-        <div>
-             {/* {loading ? (
-          <div className='text-center d-flex justify-content-center'>
-            <ReactLoading
-              type='spin'
-              color='blue'
-              height={"20%"}
-              width={"20%"}
+              src={product.avatar}
+              className={`${styles.cardImg}`}
+              alt="..."
             />
-          </div>
-        ) : ( */}
-            <Header />
+            <div className={`card-body p-2`}>
+              <p
+                className={`card-text ${styles.fzCardText} mt-1 mb-2`}
+              >
+                {product.name}
+              </p>
+            </div>
+            <div className="d-flex justify-content-between p-1">
+              <div className="d-flex">
+                <h5 className="card-title text-danger">
+                  {product.price.toLocaleString()}.đ
+                </h5>
+              </div>
+              <span>Đã bán 100</span>
+            </div>
+          </Link>
+        );
+      });
+    }
+  };
+  return (
+    <div>
+
+      <Header />
+      
       <Container>
         <Row>
           <Col>
@@ -311,17 +318,36 @@ const ProductList = () => {
           <Row>
             <Col lg="12" className="">
               <div className={`${styles.cardProduct}`}>
-              <div className="d-flex flex-wrap "> {renderProduct()}</div>
-                
+                <div className="d-flex flex-wrap "> {renderProduct()}</div>
+
               </div>
             </Col>
           </Row>
-        </Container>     
+        </Container>
       </Container>
+      <Row>
+        <Col>
+          <div className={`d-flex justify-content-center mt-5 mb-3`}>
+            {pages.map((e, i) => {
+              return (
+                <button
+                  className="border-0 shadow  mb-3 ms-3 pb-2 px-2 bg-body rounded mx-3"
+                  key={i}
+                  onClick={() => {
+                    handleNextPage(i);
+                  }}
+                >
+                  {e}
+                </button>
+              );
+            })}
+          </div>
+        </Col>
+      </Row>
       <Footer />
-        {/* )}*/}
+      {/* )}*/}
     </div>
-    );
+  );
 };
 
 export default ProductList;

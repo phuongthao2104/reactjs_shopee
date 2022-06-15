@@ -30,8 +30,9 @@ const Cart = () => {
 
   // const total = items.map((item) => { });
 
-  const infor = localStorage.getItem("infor");
+  const infor = localStorage.getItem("userData");
   const nameInfor = JSON.parse(infor);
+  console.log(nameInfor ,'nameInfor');
   const handleOnChange = (e) => {
     console.log(e.quantity);
     if (check === true) {
