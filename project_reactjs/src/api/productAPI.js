@@ -12,11 +12,13 @@ async function listProduct() {
 }
 
 async function detailProduct(product_id) {
+  console.log(product_id, "id");
   try {
     const result = await serviceCallApi(`products/${product_id}`, "GET");
     return result;
   } catch (error) {
     return error;
   }
+  
 }
 export { listProduct, detailProduct };

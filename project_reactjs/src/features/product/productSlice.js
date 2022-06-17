@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { payloadCreate } from "../../untils";
 import { products } from "./../../services/productService";
 
 export const getListProduct = createAsyncThunk(
@@ -7,7 +8,7 @@ export const getListProduct = createAsyncThunk(
 );
 export const getDetailProduct = createAsyncThunk(
   "product/getDetail",
-  products.productDetailService
+  payloadCreate(products.productDetailService)
 );
 
 const initialState = {

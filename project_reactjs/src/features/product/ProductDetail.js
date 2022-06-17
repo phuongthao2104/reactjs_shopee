@@ -11,42 +11,33 @@ import "react-toastify/dist/ReactToastify.css";
 import { getDetailProduct, selectProduct } from "./productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { detailProduct } from "../../api/productAPI";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const ProductDetail = () => {
-    const { product_id } = useParams();
-  // const [count, setCount] = useState(1);
+  const { product_id } = useParams();
   const [product, setProduct] = useState({});
   const { addItem } = useCart();
   const [quantity, SetQuantity] = useState(1);
   const dispatch = useDispatch();
   const { loading, data } = useSelector(selectProduct);
   const navigate = useNavigate();
- 
-  // const getProductDetail = useCallback(async () => {
-  //   try {
-  //      await dispatch(getDetailProduct(product_id));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   getProductDetail();
-  //   document.body.scrollTop = 0;
-  //   document.documentElement.scrollTop = 0;
-  // }, [dispatch, getProductDetail]);
+  
 
 
- useEffect(() => {
-  (async () => {
-    const result = await detailProduct(product_id);
-    if(result.success) {
-      setProduct(result.data);
-    }
-  })();
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }, [product_id]);
+  useEffect(() => {
+    var realId = parseInt(product_id);
+    (async function() {
+      const result =  await dispatch(getDetailProduct(realId))
+      unwrapResult(result);
+      // console.log('result: ', result);
+      setProduct(result.payload.data)
+    })()
+    
+    
+    // document.body.scrollTop = 0;
+    // document.documentElement.scrollTop = 0;
+  }, [dispatch, product_id]);
+
 
   const addItemToCart = () => {
     const data ={

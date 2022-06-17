@@ -4,24 +4,24 @@ import Header from "../../components/Layout/DefaultLayout/Header";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Col, Row, Container} from "react-bootstrap";
 import styles from "../user/UserPage.module.css";
+import { orderGetList, selectOrder } from "../../features/order/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+
 const UserPage = () => {
-const infor = localStorage.getItem("infor");
+  const infor = localStorage.getItem("userData");
 const nameInfor = JSON.parse(infor);
 const [product, setProduct] = useState([]);
+const dispatch = useDispatch();
+ const { loading, data } = useSelector(selectOrder);
   useEffect(() => {
     getOrder();
   }, []);
   const getOrder = async () => {
     try {
-      const res = await serviceCallApi(
-        "order",
-        "GET",
-        null,
-        null,
-        nameInfor.token
-      );
-      setProduct(res.data);
-      console.log(res);
+      const res = await dispatch(orderGetList({nameInfor}))
+      unwrapResult(res);
+      setProduct(res.payload.data);
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +39,7 @@ const [product, setProduct] = useState([]);
         <div>
         {product.map((items) => {
                 return (
-                  <Container className="mt-4">
+                  <Container className="mt-4" key={items.id}>
                     <Row
                     className="bg-body shadow rounded-3 mb-3 pb-3"
                     key={items.id}

@@ -7,19 +7,15 @@ import ReactLoading from "react-loading";
 import serviceCallApi from "../../services/serviceApi";
 import { Link, useNavigate } from "react-router-dom";
 import { nameInfor } from "./../../untils";
+import { useDispatch} from "react-redux";
 import axios from "axios";
+import { orderCheckout } from "../../features/order/orderSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const Checkout = () => {
 
   // const [loading, setLoading] = useState(false);
-  const {
-    isEmpty,
-    totalUniqueItems,
-    items,
-    updateItemQuantity,
-    removeItem } =
-    useCart();
-
+  const {items,} =   useCart();
   const {
     register,
     handleSubmit,
@@ -33,8 +29,7 @@ const Checkout = () => {
     },
   });
   const navigate = useNavigate();
-
-  // console.log(nameInfor);
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     // setLoading(true);
@@ -45,17 +40,17 @@ const Checkout = () => {
       address: data.address,
       item: items,
     }
-    // console.log(
-    //   "🚀 ~ file: CheckOut.js ~ line 39 ~ onSubmit ~ orderProduct",
-    //   orderProduct
-    // );
-    try {
-      await serviceCallApi('order', 'POST', orderProduct, null, nameInfor.token);
-      navigate("/thank")
-      // console.log(orderProduct);
-    } catch (error) {
-      console.log(error);
-    }
+
+    console.log('orderProduct: ', orderProduct);
+    const result =  await dispatch(orderCheckout({orderProduct,nameInfor}))
+    unwrapResult(result);
+    navigate("/thank")
+    // try {
+    //   await serviceCallApi('order', 'POST', orderProduct, null, nameInfor.token);
+    //   navigate("/thank")
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   return (
     <div>

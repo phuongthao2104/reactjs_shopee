@@ -18,7 +18,6 @@ const Cart = () => {
   const [check, setCheck] = useState(true);
   const {
     isEmpty,
-
     items,
     totalItems,
     cartTotal,
@@ -28,7 +27,6 @@ const Cart = () => {
   } = useCart();
   console.log(items);
 
-  // const total = items.map((item) => { });
 
   const infor = localStorage.getItem("userData");
   const nameInfor = JSON.parse(infor);
