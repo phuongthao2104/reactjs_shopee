@@ -43,28 +43,24 @@ const Header = () => {
     }
   };
  
-  // const handLogOut = () => {
-  //   localStorage.removeItem("infor");
-
-  //   navigate("/");
-  //   window.location.reload();
-  //   console.log("click");
-  // };
   const hanDangNhap = () => {
     if (loggedIn) {
-      // navigate("/");
 
       console.log(loggedIn);
     } else {
       window.location.reload(navigate("/login"));
     }
   };
+
+
   const hanGioHang = () => {
     if (loggedIn) {
       navigate("/my-profile");
+    
     } else {
       navigate("/login");
     }
+    document.getElementById('closeButton').click()
   };
   return (
     <div>
@@ -173,6 +169,7 @@ const Header = () => {
                           type="button"
                           className="btn btn-secondary"
                           data-bs-dismiss="modal"
+                          id="closeButton"
                         >
                           Close
                         </button>
@@ -184,116 +181,6 @@ const Header = () => {
                
               </div>
             </Col>
-            {/* <Col>
-              <ul
-                className={`d-flex list-unstyled justify-content-between  mb-0 md-5 ${styles.fz} text-nowrap`}
-              >
-                <li>Kênh Người Bán</li>
-                <li>Tải ứng dụng</li>
-                <li>kết nối</li>
-                <li>Thông báo</li>
-                <li>Hỗ trợ</li>
-                <li>Tiếng việt</li>
-                <ul />
-
-                <Col />
-                <Col lg="2" sm="3" xs="1">
-                  <div className="d-flex justify-content-around ms-5">
-                    <div className="d-flex justify-content-around mt-2 ">
-                      <div className=" ">
-                        <div className="d-none d-md-block ms-5  ">
-                          {nameInfor ? (
-                            <div>
-                              <h6>{nameInfor.name}</h6>
-                            </div>
-                          ) : (
-                            <button
-                              data-bs-toggle="modal"
-                              data-bs-target="#exampleModal"
-                              className="border-0 bg-body  py-1 px-2 text-nowrap mt-2 ms-5"
-                              onClick={hanDangNhap}
-                            >
-                              Đăng nhập
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                      <div className=" d-flex">
-                        <div className="d-none d-md-block ">
-                          {nameInfor && (
-                            <div>
-                              <button
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                className="border-0 bg-body  py-1 px-2 text-nowrap mt-2 ms-5"
-                                onClick={handLogOut}
-                              >
-                                Đăng xuất
-                              </button>
-                              <button
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                className="border-0 bg-body  py-1 px-2 text-nowrap mt-2 ms-5"
-                                onClick={hanGioHang}
-                              >
-                                Quản lý đơn hàng
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      className={`${styles.modall} modal`}
-                      id="exampleModal"
-                      tabIndex="-1"
-                      aria-labelledby="exampleModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">
-                              Modal title
-                            </h5>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            ></button>
-                          </div>
-                          <div className="modal-body text-black">
-                            <div>
-                              <button
-                                className={`bg-body border-0 ${styles.hoverButton} mb-2`}
-                              >
-                                Tài khoản của tôi
-                              </button>
-                            </div>
-                            <div>
-                              <button className={`bg-body border-0  mb-2`}>
-                                Đơn mua hàng
-                              </button>
-                            </div>
-                          </div>
-                          <div className={`modal-footer ${styles.logOut}`}>
-                            <button
-                              className="border-0 bg-body rounded-3 py-1 px-2 text-nowrap ms-2"
-                              onClick={handLogOut}
-                            >
-                              <BsBoxArrowRight className="fs-5 fw-bold me-2" />{" "}
-                              Đăng Xuất
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </ul>
-            </Col> */}
           </Row>
         </Container>
       </Container>

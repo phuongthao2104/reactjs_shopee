@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import serviceCallApi from "../../services/serviceApi";
+import React, { useEffect, useState, useCallback } from "react";
 import Header from "../../components/Layout/DefaultLayout/Header";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Col, Row, Container} from "react-bootstrap";
@@ -13,11 +12,11 @@ const UserPage = () => {
 const nameInfor = JSON.parse(infor);
 const [product, setProduct] = useState([]);
 const dispatch = useDispatch();
- const { loading, data } = useSelector(selectOrder);
+ const { data } = useSelector(selectOrder);
   useEffect(() => {
     getOrder();
   }, []);
-  const getOrder = async () => {
+  const getOrder = useCallback(async () => {
     try {
       const res = await dispatch(orderGetList({nameInfor}))
       unwrapResult(res);
@@ -25,8 +24,20 @@ const dispatch = useDispatch();
     } catch (error) {
       console.log(error);
     }
-  };
+  },[dispatch]);
   
+  useEffect(() => {
+    getOrder();
+  },[dispatch, getOrder]);
+  // const getOrder = async () => {
+  //   try {
+  //     const res = await dispatch(orderGetList({nameInfor}))
+  //     unwrapResult(res);
+  //     setProduct(res.payload.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className={`${styles.bg}`}>
       <Header />

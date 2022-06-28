@@ -3,19 +3,15 @@ import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Layout/DefaultLayout/Header";
 import { useForm } from "react-hook-form";
 import { useCart } from "react-use-cart";
-import ReactLoading from "react-loading";
-import serviceCallApi from "../../services/serviceApi";
 import { Link, useNavigate } from "react-router-dom";
 import { nameInfor } from "./../../untils";
 import { useDispatch} from "react-redux";
-import axios from "axios";
 import { orderCheckout } from "../../features/order/orderSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const Checkout = () => {
 
-  // const [loading, setLoading] = useState(false);
-  const {items,} =   useCart();
+  const {items} =   useCart();
   const {
     register,
     handleSubmit,
@@ -28,11 +24,11 @@ const Checkout = () => {
       Email: nameInfor.email,
     },
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    // setLoading(true);
     const orderProduct = {
       user_id: nameInfor.id,
       full_name: data.fullName,
@@ -40,17 +36,20 @@ const Checkout = () => {
       address: data.address,
       item: items,
     }
-
-    console.log('orderProduct: ', orderProduct);
-    const result =  await dispatch(orderCheckout({orderProduct,nameInfor}))
+    try{
+      const result =  await dispatch(orderCheckout({orderProduct,nameInfor}))
     unwrapResult(result);
     navigate("/thank")
+    }
+    // console.log('orderProduct: ', orderProduct);
+    
     // try {
     //   await serviceCallApi('order', 'POST', orderProduct, null, nameInfor.token);
     //   navigate("/thank")
-    // } catch (error) {
-    //   console.log(error);
     // }
+     catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

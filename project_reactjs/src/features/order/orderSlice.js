@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { payloadCreate } from "../../untils";
 import { order } from "../../services/orderService";
 
-  export const orderCheckout = createAsyncThunk("order/checkout", async function({ orderProduct, nameInfor }) {
+  export const orderCheckout = createAsyncThunk("order/checkout",
+  async function({ orderProduct, nameInfor }) {
     const data = await order.orderCheckoutService(orderProduct, nameInfor);
     return data;
-  });
+  }
+  );
   export const orderGetList = createAsyncThunk("order/getList",async function({ nameInfor }) {
     const data = await order.orderGetListService(nameInfor);
     return data;
-    // console.log("data:",data)
   });
   const initialState = {
     loading: false,

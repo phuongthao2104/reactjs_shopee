@@ -7,11 +7,6 @@ async function productListService() {
 async function productDetailService(product_id) {
   const result = await serviceCallApi(`products/${product_id}`, "GET");
   return result;
-    // const response = await detailProduct(product_id);
-    // if(response.success) {
-    //         setProduct(response.data);
-    //       }
-    // return response;
   }
 
 
